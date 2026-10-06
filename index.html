@@ -98,9 +98,9 @@ button{font:inherit;cursor:pointer}
 <section id="win" class="hidden">
   <div class="reward">🎁</div>
   <h1>REWARD UNLOCKED</h1>
-  <p><b>Congratulations, Beabou. ❤️</b></p>
-  <p>You survived my challenge.<br>Your reward has officially been unlocked.</p>
-  <h2>COME FIND ME TO CLAIM YOUR REWARD 💕</h2>
+  <p><b>Congratulations, Beeboo. ❤️</b></p>
+  <p>You survived Beabou's challenge.<br>Your reward has officially been unlocked.</p>
+  <h2>COME FIND BEABOU TO CLAIM YOUR REWARD 💕</h2>
   <button class="primary" onclick="location.reload()">PLAY AGAIN</button>
 </section>
 
@@ -114,14 +114,14 @@ button{font:inherit;cursor:pointer}
 <script>
 let lives=3, locked=false, current=0;
 const questions=[
- {q:"When we first met, what was my first impression of you?",a:["A. You were really cute","B. You seemed a little intimidating","C. You were way too loud 😂","D. I was too shy to even look at you"],c:3},
- {q:"If I suddenly disappear for 30 minutes, what am I most likely doing?",a:["A. Falling asleep","B. Playing shooting games 🎮","C. Taking a shower","D. Preparing a surprise for you"],c:1},
+ {q:"If we could only travel to one place together right now, where would Beabou most likely choose to go?",a:["A. Japan 🇯🇵","B. Thailand 🇹🇭","C. South Korea 🇰🇷","D. New Zealand 🇳🇿"],c:0},
+ {q:"If Beabou suddenly disappears for 30 minutes, what is he most likely doing?",a:["A. Falling asleep","B. Playing shooting games 🎮","C. Taking a shower","D. Preparing a surprise for you"],c:1},
  {q:'Who said "I love you" first?',a:["A. Beabou","B. Beeboo","C. We said it at the same time","D. Neither of us remembers 😂"],c:1},
  null,
  {q:"How many lives do you have right now?",dynamic:true},
- {q:"Which one would I choose?",a:["A. A fancy restaurant 🍽️","B. A weekend trip ✈️","C. Staying home and playing games 🎮","D. Shopping together 🛍️"],c:3},
+ {q:"Which one would Beabou choose?",a:["A. A fancy restaurant 🍽️","B. A weekend trip ✈️","C. Staying home and playing games 🎮","D. Shopping together 🛍️"],c:3},
  {q:"After an argument, who is more likely to make peace first?",a:["A. Beabou","B. Beeboo","C. Both of us","D. Whoever gets hungry first 😂"],c:0},
- {q:"How much do I love you?",a:["A. 100%","B. 1000%","C. ♾️","D. It cannot be measured"],c:2}
+ {q:"How much does Beabou love Beeboo?",a:["A. 100%","B. 1000%","C. ♾️","D. It cannot be measured"],c:2}
 ];
 
 function hideAll(){document.querySelectorAll("main>section").forEach(x=>x.classList.add("hidden"))}
