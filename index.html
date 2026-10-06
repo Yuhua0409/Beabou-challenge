@@ -84,14 +84,14 @@ button{font:inherit;cursor:pointer}
 </section>
 
 <section id="heartGame" class="hidden">
-  <div class="stats"><span>❤️ <span id="hits">0</span>/20</span><span>⏱ <span id="timer">10.0</span>s</span></div>
-  <h2>Catch 20 hearts!</h2>
+  <div class="stats"><span>❤️ <span id="hits">0</span>/15</span><span>⏱ <span id="timer">10.0</span>s</span></div>
+  <h2>Catch 15 hearts!</h2>
   <div id="heartArena"></div>
 </section>
 
 <section id="heartFail" class="hidden">
   <div class="logo">💔</div><h1>SO CLOSE!</h1>
-  <p>You need to catch 20 hearts in 10 seconds.<br>Try again — this level doesn't cost lives.</p>
+  <p>You need to catch 15 hearts in 10 seconds.<br>Try again — this level doesn't cost lives.</p>
   <button class="primary" onclick="startHeartGame()">TRY AGAIN</button>
 </section>
 
@@ -116,11 +116,11 @@ let lives=3, locked=false, current=0;
 const questions=[
  {q:"When we first met, what was my first impression of you?",a:["A. You were really cute","B. You seemed a little intimidating","C. You were way too loud 😂","D. I was too shy to even look at you"],c:3},
  {q:"If I suddenly disappear for 30 minutes, what am I most likely doing?",a:["A. Falling asleep","B. Playing shooting games 🎮","C. Taking a shower","D. Preparing a surprise for you"],c:1},
- {q:'Who said "I love you" first?',a:["A. Me","B. You","C. We said it at the same time","D. Neither of us remembers 😂"],c:1},
+ {q:'Who said "I love you" first?',a:["A. Beabou","B. Beeboo","C. We said it at the same time","D. Neither of us remembers 😂"],c:1},
  null,
  {q:"How many lives do you have right now?",dynamic:true},
  {q:"Which one would I choose?",a:["A. A fancy restaurant 🍽️","B. A weekend trip ✈️","C. Staying home and playing games 🎮","D. Shopping together 🛍️"],c:3},
- {q:"After an argument, who is more likely to make peace first?",a:["A. Me","B. You","C. Both of us","D. Whoever gets hungry first 😂"],c:0},
+ {q:"After an argument, who is more likely to make peace first?",a:["A. Beabou","B. Beeboo","C. Both of us","D. Whoever gets hungry first 😂"],c:0},
  {q:"How much do I love you?",a:["A. 100%","B. 1000%","C. ♾️","D. It cannot be measured"],c:2}
 ];
 
@@ -210,7 +210,7 @@ function spawnHeart(){
  b.style.left=Math.random()*maxX+"px";b.style.top=Math.random()*maxY+"px";
  b.onclick=()=>{hits++;document.getElementById("hits").textContent=hits;
    if(navigator.vibrate)navigator.vibrate(20);
-   if(hits>=20){clearInterval(heartTimer);finishHeart(true)}else spawnHeart()
+   if(hits>=15){clearInterval(heartTimer);finishHeart(true)}else spawnHeart()
  };
  arena.appendChild(b)
 }
