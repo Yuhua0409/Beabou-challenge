@@ -1,110 +1,233 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Secret Challenge</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#160d1c">
+<title>Beabou Challenge</title>
 <style>
-  *{box-sizing:border-box}
-  body{
-    margin:0; min-height:100vh; display:grid; place-items:center;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-    background:linear-gradient(145deg,#fff1f5,#f3e8ff);
-    color:#2b2430; padding:22px;
-  }
-  .card{
-    width:min(430px,100%); background:rgba(255,255,255,.88);
-    border-radius:28px; padding:32px 24px; text-align:center;
-    box-shadow:0 18px 55px rgba(70,35,75,.15);
-  }
-  .heart{font-size:54px; animation:pulse 1.2s infinite alternate}
-  @keyframes pulse{to{transform:scale(1.12)}}
-  h1{margin:12px 0 8px;font-size:30px}
-  p{line-height:1.55;color:#665b69}
-  button{
-    width:100%; border:0; border-radius:16px; padding:15px 18px;
-    font-size:17px; font-weight:700; margin-top:12px; cursor:pointer;
-    background:#222; color:white;
-  }
-  button.option{background:#fff;color:#342b38;border:1px solid #e8dfe9}
-  button.option:hover{background:#f8eef8}
-  .top{display:flex;justify-content:space-between;font-size:14px;margin-bottom:20px}
-  .hidden{display:none}
-  .msg{min-height:28px;margin-top:12px;font-weight:700}
-  .success{color:#16834a}.fail{color:#c0394b}
-  .bar{height:8px;background:#eee5ef;border-radius:99px;overflow:hidden;margin:10px 0 22px}
-  .fill{height:100%;width:0;background:#222;transition:.35s}
+:root{--pink:#ff4f8b;--pink2:#ff91b8;--bg:#160d1c;--muted:#d9cbdc}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#160d1c;color:#fff}
+body{min-height:100vh;min-height:100dvh;overflow-x:hidden;background:radial-gradient(circle at 20% 0%,#542040 0,transparent 34%),radial-gradient(circle at 100% 100%,#36205b 0,transparent 38%),#160d1c}
+.wrap{width:min(480px,100%);min-height:100vh;min-height:100dvh;margin:auto;padding:22px 18px;display:flex;align-items:center}
+.card{width:100%;padding:26px 20px;border:1px solid rgba(255,255,255,.12);border-radius:28px;background:rgba(255,255,255,.08);backdrop-filter:blur(15px);box-shadow:0 24px 70px rgba(0,0,0,.3);text-align:center}
+.hidden{display:none!important}
+.logo{font-size:62px;animation:pulse 1.2s infinite alternate}
+@keyframes pulse{to{transform:scale(1.1)}}
+h1{font-size:30px;margin:12px 0 8px;line-height:1.1}h2{font-size:23px;line-height:1.3;margin:12px 0 20px}
+p{color:var(--muted);line-height:1.55}
+button{font:inherit;cursor:pointer}
+.primary,.option{width:100%;border:0;border-radius:17px;padding:15px 16px;margin-top:11px;font-size:16px;font-weight:750}
+.primary{background:linear-gradient(135deg,var(--pink),var(--pink2));color:#fff;box-shadow:0 10px 30px rgba(255,79,139,.24)}
+.option{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.12);color:#fff;text-align:left}
+.option:active{transform:scale(.985)}
+.top{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:#eee3ef}
+.progress{height:7px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden;margin:13px 0 22px}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--pink),#bd79ff);transition:.35s}
+.msg{height:28px;margin-top:12px;font-weight:800}.good{color:#71e3a6}.bad{color:#ff8da1}
+.memory{font-size:36px;letter-spacing:8px;line-height:1.7;padding:22px 0}
+.small{font-size:13px;color:#bfaec3}
+#heartArena{height:390px;position:relative;overflow:hidden;border-radius:22px;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.10);margin-top:15px}
+.target{position:absolute;border:0;background:none;font-size:42px;padding:4px;line-height:1;filter:drop-shadow(0 6px 10px rgba(0,0,0,.3))}
+.stats{display:flex;justify-content:space-between;font-weight:800}
+.big{font-size:46px;margin:8px}
+.reward{font-size:78px;margin:10px}
+.confetti{position:fixed;top:-20px;font-size:22px;animation:fall linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.7}}
+.shake{animation:shake .28s}
+@keyframes shake{25%{transform:translateX(-7px)}50%{transform:translateX(7px)}75%{transform:translateX(-4px)}}
 </style>
 </head>
 <body>
-<main class="card">
-  <section id="start">
-    <div class="heart">💌</div>
-    <h1>Secret Challenge</h1>
-    <p>有人替你準備了一個小挑戰。<br>完成它，也許會有驚喜。</p>
-    <button onclick="begin()">START</button>
-  </section>
+<div class="wrap"><main class="card">
+<section id="start">
+  <div class="logo">💌</div>
+  <h1>BEABOU CHALLENGE</h1>
+  <p>A little challenge was made just for you.<br>Complete every level to unlock your surprise.</p>
+  <button class="primary" onclick="startGame()">START CHALLENGE</button>
+  <p class="small">You have 3 lives. Choose carefully. 👀</p>
+</section>
 
-  <section id="game" class="hidden">
-    <div class="top"><span id="level">LEVEL 1 / 3</span><span id="lives">❤️❤️❤️</span></div>
-    <div class="bar"><div class="fill" id="fill"></div></div>
-    <h1 id="question"></h1>
-    <div id="answers"></div>
-    <div class="msg" id="msg"></div>
-  </section>
+<section id="quiz" class="hidden">
+  <div class="top"><span id="levelText"></span><span id="livesText"></span></div>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div id="special"></div>
+  <h2 id="question"></h2>
+  <div id="answers"></div>
+  <div id="message" class="msg"></div>
+</section>
 
-  <section id="win" class="hidden">
-    <div class="heart">🎁</div>
-    <h1>CHALLENGE COMPLETE!</h1>
-    <p>測試版成功通關。<br>正式版這裡會解鎖你的神秘禮物 ✨</p>
-    <button onclick="location.reload()">PLAY AGAIN</button>
-  </section>
-</main>
+<section id="memoryIntro" class="hidden">
+  <div class="top"><span>LEVEL 4 / 8</span><span id="memLives"></span></div>
+  <div class="progress"><div class="fill" style="width:37.5%"></div></div>
+  <div class="big">🧠</div><h1>MEMORY CHALLENGE</h1>
+  <p>You will have 5 seconds to memorize six symbols.</p>
+  <button class="primary" onclick="showMemory()">I'M READY</button>
+</section>
+
+<section id="memoryShow" class="hidden">
+  <h1>MEMORIZE THIS</h1><div class="memory">🐝 ❤️ 🐻 🌙 🍓 ✈️</div>
+  <h2 id="countdown">5</h2>
+</section>
+
+<section id="fakeFinal" class="hidden">
+  <div class="logo">👑</div><h1>FINAL BOSS</h1>
+  <p>You made it this far. One last question...</p>
+  <button class="primary" onclick="renderQuestion(7)">CONTINUE</button>
+</section>
+
+<section id="notSoFast" class="hidden">
+  <div class="logo">😈</div><h1>NOT SO FAST...</h1>
+  <p>You really thought that was the end?</p>
+  <button class="primary" onclick="startHeartGame()">FINAL CHALLENGE</button>
+</section>
+
+<section id="heartGame" class="hidden">
+  <div class="stats"><span>❤️ <span id="hits">0</span>/20</span><span>⏱ <span id="timer">10.0</span>s</span></div>
+  <h2>Catch 20 hearts!</h2>
+  <div id="heartArena"></div>
+</section>
+
+<section id="heartFail" class="hidden">
+  <div class="logo">💔</div><h1>SO CLOSE!</h1>
+  <p>You need to catch 20 hearts in 10 seconds.<br>Try again — this level doesn't cost lives.</p>
+  <button class="primary" onclick="startHeartGame()">TRY AGAIN</button>
+</section>
+
+<section id="win" class="hidden">
+  <div class="reward">🎁</div>
+  <h1>REWARD UNLOCKED</h1>
+  <p><b>Congratulations, Beabou. ❤️</b></p>
+  <p>You survived my challenge.<br>Your reward has officially been unlocked.</p>
+  <h2>COME FIND ME TO CLAIM YOUR REWARD 💕</h2>
+  <button class="primary" onclick="location.reload()">PLAY AGAIN</button>
+</section>
+
+<section id="gameover" class="hidden">
+  <div class="logo">💀</div><h1>GAME OVER</h1>
+  <p>You ran out of lives.<br>But I'm generous enough to give you another chance. 😌</p>
+  <button class="primary" onclick="resetGame()">TRY AGAIN</button>
+</section>
+</main></div>
 
 <script>
-const qs=[
- {q:"第一關：準備好了嗎？",a:["還沒有 😭","當然準備好了 😎"],correct:1},
- {q:"第二關：哪一個比較像驚喜？",a:["📚 作業","🎁 神秘禮物","🧹 打掃"],correct:1},
- {q:"FINAL：要不要解鎖最後的驚喜？",a:["不要","當然要 ❤️"],correct:1}
+let lives=3, locked=false, current=0;
+const questions=[
+ {q:"When we first met, what was my first impression of you?",a:["A. You were really cute","B. You seemed a little intimidating","C. You were way too loud 😂","D. I was too shy to even look at you"],c:3},
+ {q:"If I suddenly disappear for 30 minutes, what am I most likely doing?",a:["A. Falling asleep","B. Playing shooting games 🎮","C. Taking a shower","D. Preparing a surprise for you"],c:1},
+ {q:'Who said "I love you" first?',a:["A. Me","B. You","C. We said it at the same time","D. Neither of us remembers 😂"],c:1},
+ null,
+ {q:"How many lives do you have right now?",dynamic:true},
+ {q:"Which one would I choose?",a:["A. A fancy restaurant 🍽️","B. A weekend trip ✈️","C. Staying home and playing games 🎮","D. Shopping together 🛍️"],c:3},
+ {q:"After an argument, who is more likely to make peace first?",a:["A. Me","B. You","C. Both of us","D. Whoever gets hungry first 😂"],c:0},
+ {q:"How much do I love you?",a:["A. 100%","B. 1000%","C. ♾️","D. It cannot be measured"],c:2}
 ];
-let i=0,lives=3,locked=false;
 
-function begin(){
- document.getElementById("start").classList.add("hidden");
- document.getElementById("game").classList.remove("hidden");
- render();
-}
-function render(){
- locked=false;
- document.getElementById("level").textContent=`LEVEL ${i+1} / ${qs.length}`;
- document.getElementById("lives").textContent="❤️".repeat(lives)+"🖤".repeat(3-lives);
- document.getElementById("fill").style.width=`${i/qs.length*100}%`;
- document.getElementById("question").textContent=qs[i].q;
- document.getElementById("msg").textContent="";
- const box=document.getElementById("answers"); box.innerHTML="";
- qs[i].a.forEach((x,n)=>{
-   const b=document.createElement("button");
-   b.className="option"; b.textContent=x;
-   b.onclick=()=>choose(n); box.appendChild(b);
+function hideAll(){document.querySelectorAll("main>section").forEach(x=>x.classList.add("hidden"))}
+function lifeString(){return "❤️".repeat(lives)+"🖤".repeat(3-lives)}
+function startGame(){hideAll();renderQuestion(0)}
+function resetGame(){lives=3;current=0;hideAll();document.getElementById("start").classList.remove("hidden")}
+
+function renderQuestion(idx){
+ current=idx; hideAll(); locked=false;
+ if(idx===3){document.getElementById("memoryIntro").classList.remove("hidden");document.getElementById("memLives").textContent=lifeString();return}
+ if(idx===7 && !window.finalIntroShown){window.finalIntroShown=true;document.getElementById("fakeFinal").classList.remove("hidden");return}
+ const q=questions[idx], sec=document.getElementById("quiz");sec.classList.remove("hidden");
+ document.getElementById("levelText").textContent=`LEVEL ${idx+1} / 8`;
+ document.getElementById("livesText").textContent=lifeString();
+ document.getElementById("fill").style.width=`${idx/8*100}%`;
+ document.getElementById("special").innerHTML="";
+ document.getElementById("question").textContent=q.q;
+ const box=document.getElementById("answers");box.innerHTML="";
+ let answers=q.a, correct=q.c;
+ if(q.dynamic){
+   const correctLives=lives;
+   answers=["A. 0 lives","B. 1 life","C. 2 lives","D. 3 lives"];
+   correct=correctLives===0?0:correctLives===1?1:correctLives===2?2:3;
+ }
+ answers.forEach((txt,n)=>{
+   const b=document.createElement("button");b.className="option";b.textContent=txt;
+   b.onclick=()=>answer(n,correct);box.appendChild(b)
  });
+ document.getElementById("message").textContent="";
 }
-function choose(n){
- if(locked)return; locked=true;
- const msg=document.getElementById("msg");
- if(n===qs[i].correct){
-   msg.textContent="✓ Correct!"; msg.className="msg success";
-   setTimeout(()=>{i++; if(i===qs.length)finish(); else render();},650);
+
+function answer(n,correct){
+ if(locked)return;locked=true;
+ const msg=document.getElementById("message");
+ if(n===correct){
+   msg.textContent="✓ CORRECT";msg.className="msg good";
+   setTimeout(()=>{
+     if(current===7){hideAll();document.getElementById("notSoFast").classList.remove("hidden")}
+     else renderQuestion(current+1)
+   },650);
  }else{
-   lives--; msg.textContent="✕ Wrong answer!"; msg.className="msg fail";
-   document.getElementById("lives").textContent="❤️".repeat(lives)+"🖤".repeat(3-lives);
-   if(lives<=0){
-     setTimeout(()=>{alert("Game Over — 再試一次 😈"); location.reload();},500);
-   }else setTimeout(()=>{locked=false; msg.textContent="再選一次 👀";},650);
+   lives--;msg.textContent="✕ WRONG — You lost a life!";msg.className="msg bad";
+   document.getElementById("livesText").textContent=lifeString();
+   document.querySelector(".card").classList.add("shake");
+   setTimeout(()=>document.querySelector(".card").classList.remove("shake"),300);
+   if(lives<=0){setTimeout(()=>{hideAll();document.getElementById("gameover").classList.remove("hidden")},700)}
+   else setTimeout(()=>{locked=false;msg.textContent="Try again 👀"},650);
  }
 }
-function finish(){
- document.getElementById("game").classList.add("hidden");
- document.getElementById("win").classList.remove("hidden");
+
+function showMemory(){
+ hideAll();document.getElementById("memoryShow").classList.remove("hidden");
+ let n=5;document.getElementById("countdown").textContent=n;
+ const iv=setInterval(()=>{n--;document.getElementById("countdown").textContent=n;
+   if(n<=0){clearInterval(iv);showMemoryQuestion()}
+ },1000)
+}
+function showMemoryQuestion(){
+ hideAll();const sec=document.getElementById("quiz");sec.classList.remove("hidden");current=3;locked=false;
+ document.getElementById("levelText").textContent="LEVEL 4 / 8";
+ document.getElementById("livesText").textContent=lifeString();
+ document.getElementById("fill").style.width="37.5%";
+ document.getElementById("question").textContent="What was the THIRD symbol?";
+ const vals=["A. 🐝","B. ❤️","C. 🐻","D. 🌙"],box=document.getElementById("answers");box.innerHTML="";
+ vals.forEach((x,n)=>{let b=document.createElement("button");b.className="option";b.textContent=x;b.onclick=()=>answer(n,2);box.appendChild(b)});
+ document.getElementById("message").textContent="";
+}
+
+let heartTimer, endTime, hits=0;
+function startHeartGame(){
+ hideAll();document.getElementById("heartGame").classList.remove("hidden");
+ hits=0;document.getElementById("hits").textContent=0;
+ const arena=document.getElementById("heartArena");arena.innerHTML="";
+ endTime=performance.now()+10000;spawnHeart();
+ clearInterval(heartTimer);
+ heartTimer=setInterval(()=>{
+   const left=Math.max(0,(endTime-performance.now())/1000);
+   document.getElementById("timer").textContent=left.toFixed(1);
+   if(left<=0){clearInterval(heartTimer);finishHeart(false)}
+ },50)
+}
+function spawnHeart(){
+ const arena=document.getElementById("heartArena");arena.innerHTML="";
+ const b=document.createElement("button");b.className="target";b.textContent="❤️";
+ const maxX=Math.max(0,arena.clientWidth-58),maxY=Math.max(0,arena.clientHeight-58);
+ b.style.left=Math.random()*maxX+"px";b.style.top=Math.random()*maxY+"px";
+ b.onclick=()=>{hits++;document.getElementById("hits").textContent=hits;
+   if(navigator.vibrate)navigator.vibrate(20);
+   if(hits>=20){clearInterval(heartTimer);finishHeart(true)}else spawnHeart()
+ };
+ arena.appendChild(b)
+}
+function finishHeart(ok){
+ hideAll();
+ if(ok){document.getElementById("win").classList.remove("hidden");confetti()}
+ else document.getElementById("heartFail").classList.remove("hidden")
+}
+function confetti(){
+ const icons=["💗","✨","💕","🎉","❤️"];
+ for(let i=0;i<55;i++){
+   setTimeout(()=>{
+     const s=document.createElement("span");s.className="confetti";s.textContent=icons[Math.floor(Math.random()*icons.length)];
+     s.style.left=Math.random()*100+"vw";s.style.animationDuration=(2.5+Math.random()*2.5)+"s";
+     document.body.appendChild(s);setTimeout(()=>s.remove(),5200)
+   },i*45)
+ }
 }
 </script>
 </body>
